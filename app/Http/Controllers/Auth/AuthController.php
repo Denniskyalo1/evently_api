@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request){
-     
        $userData =[
         'name' => $request->name,
         'username' => $request->username,
         'email' => $request->email,
+        'role' => $request->role ?? 'user', 
         'password' => Hash::make($request->password),
+
     ];
 
     $user = User::create($userData);
@@ -32,6 +33,22 @@ class AuthController extends Controller
     }
 
     public function login(LoginRequest $request){
-       $request->validated();
+        $user = User::whereUsername($request->username)->first();
+
+        if(!$user || !Hash::check($request->password, $user -> password)){
+            return response([
+                'message'=> 'Invalid credentials',
+            ], 401);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+        'message' => 'Login successful',
+        'user' => $user,
+        'token' => $token,
+    ], 200);
+
+
+
     }
 }
