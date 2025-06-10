@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             "username"=> "required|string|min:6|unique:users,username",
             "name"=> "required|string|max:255",
             "password"=> "required|string|min:6",
-            "role" => "required|in:user,eventmanager",
+            "role" => "required|in:user,eventmanager,admin",
         ];
     }
 }
