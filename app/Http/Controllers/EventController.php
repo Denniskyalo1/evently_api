@@ -29,4 +29,24 @@ public function store(StoreEventRequest $request)
         'event' => $event
     ]);
 }
+
+public function index()
+{
+    $events = Event::with('category', 'user')->get();
+    $formattedEvents = $events->map(function ($event) {
+        return [
+            'id' => $event->id,
+            'title' => $event->title,
+            'description' => $event->description,
+            'city' => $event->city,
+            'venue' => $event->venue,
+            'dateTime' => $event->dateTime,
+            'imageUrl' => $event->imageUrl,
+            'price' => $event->price,
+            'category' => $event->category ? $event->category->name : null,
+        ];
+    });
+
+    return response()->json($formattedEvents);
+}
 }

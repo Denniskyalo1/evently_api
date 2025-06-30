@@ -15,7 +15,6 @@ class Payment extends Model
         'phone',
         'status',
         'transaction_reference',
-        'mpesa_receipt_number',
 
 
     ];

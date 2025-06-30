@@ -146,12 +146,11 @@ class MpesaController extends Controller
         ]);
         Log::info("Payment updated to Success", ['CheckoutRequestID' => $checkoutRequestID]);
     } else {
-        $status = ($resultCode == 1032) ? 'Canceled' : 'Failed';
         $payment->update([
-            'status' => $status,
+            'status' => "failed",
             'error_message' => $resultDesc,
         ]);
-        Log::info("Payment updated to {$status}", ['CheckoutRequestID' => $checkoutRequestID, 'ResultCode' => $resultCode, 'ResultDesc' => $resultDesc]);
+        Log::info("Payment updated to failed", ['CheckoutRequestID' => $checkoutRequestID, 'ResultCode' => $resultCode, 'ResultDesc' => $resultDesc]);
     }
 
     return response()->json(['result' => 'Callback processed successfully'], 200);
