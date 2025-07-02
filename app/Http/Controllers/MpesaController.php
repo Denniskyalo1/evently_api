@@ -218,7 +218,6 @@ class MpesaController extends Controller
                      'event_id' => $eventId,
                      'payment_id' => $payment->id,
                      'qr_code' => Str::uuid(),
-                     'status' => 'confirmed',
              ]);
         }
          Log::info("Tickets generated automatically after payment", [

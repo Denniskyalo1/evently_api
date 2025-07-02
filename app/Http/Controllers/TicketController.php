@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TicketConfirmation;
+use Illuminate\Support\Facades\Log;
 
 class TicketController extends Controller
 {
@@ -58,4 +59,28 @@ class TicketController extends Controller
             'tickets' => $tickets,
         ], 201);
     }
+
+    public function myTickets(Request $request)
+{
+    $user = $request->user();
+
+    $tickets = Ticket::with('event', 'user')
+        ->where('user_id', $user->id)
+        ->get()
+        ->map(function ($ticket) {
+            return [
+                'user_name'=>$ticket->user->name,
+                'event_name' => $ticket->event->title,
+                'event_image'=> $ticket->event->imageUrl,
+                'date' => \Carbon\Carbon::parse($ticket->event->dateTime)->format('F j, Y – g:i A'),
+                'venue' => $ticket->event->venue,
+                'city' => $ticket->event->city,
+                'qr_code' => $ticket->qr_code,
+            ];
+        });
+
+    Log::info('Tickets fetched for user', ['user_id' => $user->id]);
+
+    return response()->json($tickets);
+}
 }

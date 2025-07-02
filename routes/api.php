@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MpesaController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
     })->middleware('throttle:6,1')->name('verification.send');
      Route::post('/mpesa/stkpush', [MpesaController::class, 'stkPush']);
     Route::post('/ticket', [EventController::class, 'store']);
+    Route::get('/myTickets', [TicketController::class, 'myTickets']);
 
 });
 
