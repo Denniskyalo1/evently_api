@@ -11,10 +11,12 @@ class Payment extends Model
 
     protected $fillable = [
         'user_id',
+        'event_id',
         'amount',
         'phone',
         'status',
         'transaction_reference',
+        'ticket_quantity',
 
 
     ];
@@ -22,5 +24,9 @@ class Payment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
     }
 }

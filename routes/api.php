@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['message' => 'Verification email resent']);
     })->middleware('throttle:6,1')->name('verification.send');
      Route::post('/mpesa/stkpush', [MpesaController::class, 'stkPush']);
+    Route::post('/ticket', [EventController::class, 'store']);
 
 });
 
