@@ -56,5 +56,41 @@ class EventSeeder extends Seeder
             'category_id' => 3,
             'user_id' => 1,
         ]);
+
+    Event::create([
+    'title' => 'Nairobi DevCon 2025',
+    'description' => "Kenya’s biggest software and cloud conference with top speakers from the tech industry.",
+    'venue' => 'KICC Conference Hall',
+    'city' => 'Nairobi',
+    'dateTime' => '2025-09-12 09:00:00',
+    'imageUrl' => 'events/devcon2025.jpeg',
+    'price' => '10',
+    'category_id' => 2,
+    'user_id' => 1,
+]);
+
+    Event::create([
+    'title' => 'Strathmore Basketball Showdown',
+    'description' => "Cheer on your favorite teams as university giants clash for the 2025 crown.",
+    'venue' => 'Strathmore Sports Complex',
+    'city' => 'Nairobi',
+    'dateTime' => '2025-10-02 16:00:00',
+    'imageUrl' => 'events/basketball_showdown.jpeg',
+    'price' => '300',
+    'category_id' => 3,
+    'user_id' => 1,
+]);
+
+Event::create([
+    'title' => 'Youth Innovators Business Forum',
+    'description' => "Network with Kenya’s top young entrepreneurs and investors at this one-day forum.",
+    'venue' => 'Radisson Blu, Upper Hill',
+    'city' => 'Nairobi',
+    'dateTime' => '2025-11-10 10:00:00',
+    'imageUrl' => 'events/business_forum.jpeg',
+    'price' => '1000',
+    'category_id' => 4,
+    'user_id' => 1,
+]);
     }
 }
