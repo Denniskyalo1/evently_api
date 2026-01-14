@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Hash;
 
 // Get current authenticated user
-Route::get('/user', function (Request $request) {
+Illuminate\Support\Facades\Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
